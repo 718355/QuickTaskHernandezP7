@@ -1,33 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class WinningObjectiveScreen : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    private bool hasWon = false;
     public float winHeight = 10f;
-    public float minY = -5f;
+    public GameObject winUI;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
-
-        if (transform.position.y >= winHeight)
+        if (winUI != null)
         {
-            Win();
-        }
-
-        if (transform.position.y < minY)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.z);
+            winUI.SetActive(false);
         }
     }
 
     // Update is called once per frame
-    void Win()
+    void Update()
     {
-        SceneManager.LoadScene("WinScreen");
+        if (transform.position.y >=winHeight && !hasWon)
+        {
+            if(winUI != null)
+            {
+                winUI.SetActive(true);
+            }
+            hasWon = true;
+        }
     }
 }
