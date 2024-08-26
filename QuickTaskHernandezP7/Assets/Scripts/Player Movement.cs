@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float topBoundary = 10f;
     public float leftBoundary = -10f;
     private float speed = 5.0f;
     public float rightBoundary = 15f;
-    public float topBoundary = 10f;
     public float bottomBoundary = 0f;
 
 
@@ -22,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput);
         transform.Translate(direction * speed * Time.deltaTime);
